@@ -8,39 +8,48 @@ canvas.width = width;
 canvas.height = height;
 
 let points = [];
-let rects = [];
+let MaxPoint = 10;
+let Score = 0;
+let ScoreNeeded = 10;
 
+function MaxPoints(){
+    for(let i=0; i<MaxPoint; i++){
+        let A = new Point(new Vector2d(GetRandom(width - 30),GetRandom(height - 30)),30,"red");
+        points.push(A);
+    }    
+}
 
 function animate(){
-    context.clearRect(0,0,width,height);
-    requestAnimationFrame(animate);
-    let color = "rgb(" + getRandom(255) + "," + getRandom(255) + "," + getRandom(255) + ")"
-    let A = new Point(new Vector2d(getRandom(width),getRandom(height)),getRandom(100),color);
-    let B = new Rectangle(new Vector2d(getRandom(width),getRandom(height)),getRandom(100),getRandom(100),color);
-    A.draw(context);
-    B.draw(context);
-    points.push(A);
-    rects.push(B);
-
-    for(let i= 0; i < points.length; i++){
-        points[i].radius++;
-        points[i].draw(context);
-        if(points[i].radius > 200){
-            points.splice(i,1);
-        }
+    if(Score == ScoreNeeded){
+        Score = 0;
+        context.clearRect(0,0,width,height);
+        ScoreNeeded = ScoreNeeded*2;
+        MaxPoint = MaxPoint*2;
+        MaxPoints();
     }
-    for(let i= 0; i < rects.length; i++){
-        rects[i].radius++;
-        rects[i].draw(context);
-        if(rects[i].radius > 200){
-            rects.splice(i,1);
-        }
+    requestAnimationFrame(animate);
+    for(let i = 0; i < points.length; i++){
+        points[i].draw(context);
     }
 }
 
+MaxPoints();
 animate();
 
-function getRandom(max){
-    let ans = Math.floor(Math.random()* max);
-    return ans;
+window.addEventListener('click',(evt)=>{
+    let mouseVector =  new Vector2d(evt.clientX,evt.clientY);
+    for(let i = 0; i < points.length; i++){
+        let distanceMousePoint = new Vector2d(0,0);
+        distanceMousePoint.diffVector(mouseVector,points[i].position)
+        if (distanceMousePoint.magnitude < 30){
+            points[i].color = "blue";
+            Score++;
+            console.log(Score);
+            
+        }
+    }
+});
+
+function GetRandom(max){
+    return Math.floor(Math.random() * max);
 }
