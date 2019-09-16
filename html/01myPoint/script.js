@@ -41,7 +41,7 @@ window.addEventListener('click',(evt)=>{
     for(let i = 0; i < points.length; i++){
         let distanceMousePoint = new Vector2d(0,0);
         distanceMousePoint.diffVector(mouseVector,points[i].position)
-        if (distanceMousePoint.magnitude < 30){
+        if (distanceMousePoint.magnitude < 30 && points[i].color != "blue"){
             points[i].color = "blue";
             Score++;
             console.log(Score);
