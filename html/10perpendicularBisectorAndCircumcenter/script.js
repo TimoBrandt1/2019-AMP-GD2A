@@ -16,6 +16,8 @@ let F = new Point(new Vector2d(30,30),10,"white", "black", false);
 
 let S = new Point(new Vector2d(0,0),5,"blue", "", false);
 
+let T = new Point(new Vector2d(0,0),0,"rgba(0,0,0,0)", "", true);
+
 let l = new LinearFunction(0,0);
 let m = new LinearFunction(0,0);
 let n = new LinearFunction(0,0);
@@ -23,6 +25,7 @@ let n = new LinearFunction(0,0);
 let o = new LinearFunction(0,0);
 let p = new LinearFunction(0,0);
 let q = new LinearFunction(0,0);
+
 
 function animate(){
   requestAnimationFrame(animate);
@@ -61,6 +64,11 @@ function animate(){
   S.position.dx = q.intersection(p).x;
   S.position.dy = q.intersection(p).y;
 
+  T.position.dx = S.position.dx;
+  T.position.dy = S.position.dy;
+
+  T.radius = Math.sqrt((A.position.dx - S.position.dx) ** 2 + (A.position.dy - S.position.dy) ** 2);
+
   A.draw(context);
   B.draw(context);
   C.draw(context);
@@ -70,6 +78,7 @@ function animate(){
   F.draw(context);
 
   S.draw(context);
+  T.draw(context);
 }
 
 animate();

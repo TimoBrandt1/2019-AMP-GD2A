@@ -24,6 +24,7 @@ let l = new LinearFunction(0,0);
 let m = new LinearFunction(0,0);
 let n = new LinearFunction(0,0);
 
+//Makes the 3 lines that are 
 let o = new LinearFunction(0,0);
 let p = new LinearFunction(0,0);
 let q = new LinearFunction(0,0);
