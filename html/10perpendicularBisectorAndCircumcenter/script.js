@@ -36,6 +36,7 @@ function animate(){
   n.defineLineWithTwoPoints(C,A);
 
   o.defineLineWithTwoPoints(D,C);
+  
   p.defineLineWithTwoPoints(E,A);
   q.defineLineWithTwoPoints(F,B);
 
